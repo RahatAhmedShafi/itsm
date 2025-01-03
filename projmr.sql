@@ -147,3 +147,84 @@ CREATE TABLE transactions (
     FOREIGN KEY (admin_id) REFERENCES admin_users(admin_id) ON DELETE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE
 );
+
+-- Insert data into departments
+INSERT INTO departments (department_name, manager_id) VALUES
+('IT', NULL), ('HR', NULL), ('Finance', NULL);
+
+-- Insert data into employees
+INSERT INTO employees (full_name, email, phone_number, department_id) VALUES
+('John Doe', 'john.doe@example.com', '1234567890', 1),
+('Jane Smith', 'jane.smith@example.com', '0987654321', 2),
+('Alice Brown', 'alice.brown@example.com', '1122334455', 3);
+
+-- Update departments with manager IDs
+UPDATE departments SET manager_id = 1 WHERE department_name = 'IT';
+UPDATE departments SET manager_id = 2 WHERE department_name = 'HR';
+
+-- Insert data into services
+INSERT INTO services (service_name, description, cost) VALUES
+('Web Hosting', 'Basic hosting service', 19.99),
+('Cloud Storage', 'Secure cloud storage', 49.99);
+
+-- Insert data into projects
+INSERT INTO projects (project_name, description) VALUES
+('Project Alpha', 'Development of a new product'),
+('Project Beta', 'Enhancement of an existing system');
+
+-- Insert data into tasks
+INSERT INTO tasks (task_name, project_id) VALUES
+('Design UI', 1), ('Develop Backend', 1), ('Testing', 2);
+
+-- Insert data into testers
+INSERT INTO testers (tester_name, assigned_task_id) VALUES
+('Tester A', 3), ('Tester B', 3);
+
+-- Insert data into task history
+INSERT INTO task_history (task_id, change_description) VALUES
+(1, 'Initial Design Completed'), (2, 'Backend API Integration Started');
+
+-- Insert data into user skills
+INSERT INTO user_skills (user_id, skill_name, skill_level) VALUES
+(1, 'Python', 'Expert'), (2, 'JavaScript', 'Intermediate');
+
+-- Insert data into project risks
+INSERT INTO project_risks (project_id, risk_description, risk_level, mitigation_plan) VALUES
+(1, 'Scope Creep', 'High', 'Define clear project boundaries'),
+(2, 'Resource Availability', 'Medium', 'Ensure proper resource allocation');
+
+-- Insert data into task timer
+INSERT INTO task_timer (task_id, employee_id, start_time, end_time) VALUES
+(1, 1, '2024-01-01 10:00:00', '2024-01-01 12:00:00'),
+(2, 2, '2024-01-02 11:00:00', '2024-01-02 13:00:00');
+
+-- Insert data into feedback
+INSERT INTO feedback (user_id, feedback_text, rating) VALUES
+(1, 'Great performance!', 5), (2, 'Needs improvement in time management', 3);
+
+-- Insert data into user rewards
+INSERT INTO user_rewards (user_id, reward_name) VALUES
+(1, 'Employee of the Month'), (3, 'Top Performer Award');
+
+-- Insert data into calendar events
+INSERT INTO calendar_events (event_title, event_date, employee_id) VALUES
+('Team Meeting', '2024-01-10', 1), ('Project Deadline', '2024-01-15', 2);
+
+-- Insert data into collaborations
+INSERT INTO collaborations (project_id, collaborator_id, collaboration_details) VALUES
+(1, 1, 'Leading the design phase'), (2, 2, 'Assisting with testing');
+
+-- Insert data into admin_users
+INSERT INTO admin_users (username, password, role, status) VALUES
+('admin1', 'password1', 'Super Admin', 'Active'),
+('admin2', 'password2', 'Moderator', 'Active');
+
+-- Insert data into customers
+INSERT INTO customers (customer_name, contact_info) VALUES
+('Customer A', 'contact@example.com'), ('Customer B', 'phone:1234567890');
+
+-- Insert data into transactions
+INSERT INTO transactions (admin_id, customer_id, transaction_amount) VALUES
+(1, 1, 199.99), (2, 2, 299.99);
+
+
