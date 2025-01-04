@@ -1,8 +1,5 @@
 -- Active: 1731659303838@@127.0.0.1@3306@projmr
-Create ER Diagram for this mysql code
--- Step 0: Create Database
-CREATE DATABASE IF NOT EXISTS it_service_management;
-USE it_service_management;
+
 
 -- Step 1: Create departments table (without manager_id foreign key for circular reference)
 CREATE TABLE departments (
@@ -30,8 +27,11 @@ CREATE TABLE services (
     service_id INT AUTO_INCREMENT PRIMARY KEY,
     service_name VARCHAR(255) NOT NULL,
     description TEXT,
-    cost DECIMAL(10, 2)
+    cost DECIMAL(10, 2),
+    department_id INT, -- Foreign key column
+    FOREIGN KEY (department_id) REFERENCES departments(department_id)
 );
+
 -- Step 5: Create projects table (used in tasks and collaborations)
 CREATE TABLE projects (
     project_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -146,6 +146,18 @@ CREATE TABLE transactions (
     transaction_amount DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (admin_id) REFERENCES admin_users(admin_id) ON DELETE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE
+);
+-- Step 19: Create application usage table
+CREATE TABLE application_usage (
+    usage_id INT AUTO_INCREMENT PRIMARY KEY,
+    employee_id INT NOT NULL,
+    application_name VARCHAR(100) NOT NULL,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    duration TIME GENERATED ALWAYS AS (TIMEDIFF(end_time, start_time)) STORED,
+    task_id INT,
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
+    FOREIGN KEY (task_id) REFERENCES tasks(task_id)
 );
 
 -- Insert data into departments
